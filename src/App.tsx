@@ -3,7 +3,6 @@ import "./App.css";
 import { Header } from "./components/Header";
 import { TaskList } from "./components/TaskList";
 import { tasks } from "./model/data";
-import { filterType } from "./model/types";
 import { TaskForm } from "./components/TaskForm";
 import { TaskModel } from "./model/task-model";
 
@@ -22,25 +21,11 @@ function App() {
     });
   }
   function onTaskDelete(id: number) {
-    setTasks((prevTasks) => {
-      return prevTasks.filter((task) => task.id !== id);
-    });
-  }
-
-  function onFilter(value: filterType) {
-    setTasks(
-      value === "All"
-        ? tasks
-        : value === "Completed"
-        ? tasks.filter((task) => task.completed)
-        : tasks.filter((task) => !task.completed)
-    );
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
   }
 
   function onTaskAdd(task: TaskModel) {
-    setTasks((prevTasks) => {
-      return [task, ...prevTasks];
-    });
+    setTasks((prevTasks) => [task, ...prevTasks]);
   }
 
   function getStats() {
@@ -57,12 +42,7 @@ function App() {
       <Header />
       <main className="flex-1">
         <TaskForm onTaskAdd={onTaskAdd} />
-        <TaskList
-          tasks={tasks}
-          onFilter={onFilter}
-          onTaskDelete={onTaskDelete}
-          onTaskStatusChange={onTaskStatusChange}
-        />
+        <TaskList tasks={tasksData} onTaskDelete={onTaskDelete} onTaskStatusChange={onTaskStatusChange} />
       </main>
       <footer className="bg-aqua-marine text-sm text-center py-4">
         {stats.total === 0 ? (
