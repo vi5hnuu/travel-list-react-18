@@ -41,7 +41,7 @@ export function TaskForm({ onTaskAdd }: { onTaskAdd: (task: TaskModel) => void }
           type="button"
           disabled={taskData.count <= 0 || !taskData.itemName?.trim().length}
           onClick={onAddTaskHandle}
-          className="hover:scale-[1.03] shadow-sm transition-all text-xs rounded-full px-6 py-2 bg-aqua-marine"
+          className="hover:scale-[1.03] disabled:bg-gray-100 disabled:text-gray-400 disabled:shadow-none shadow-sm transition-all text-xs rounded-full px-6 py-2 bg-aqua-marine"
         >
           Add
         </button>
